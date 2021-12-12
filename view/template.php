@@ -21,8 +21,9 @@
         
     <body>
         <?php require('view/header.php'); ?>
-
-        <?= $content ?>
+        <main>
+            <?= $content ?>
+        </main>
     </body>
 
 

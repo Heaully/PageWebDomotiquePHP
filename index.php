@@ -10,6 +10,32 @@ if (isset($_GET['action'])) {
     {
         displayReading();
     }
+    else if ($_GET['action'] == 'sensorManagement') 
+    {
+        sensorManagement();
+    }
+    
+    else if ($_GET['action'] == 'setupNewSensorPage') 
+    {
+        setupNewSensorPage();
+
+//        dbAddNewSensor();
+  //      displayReading();
+    }
+    else if ($_GET['action'] == 'addNewSensor') 
+    {
+        addNewSensor();
+    }
+
+    else if ($_GET['action'] == 'phpinfo') 
+    {
+        phpinfo();
+    }
+    
+    else
+    {
+    homepage(); //ajouter une page,  page introuvable.
+    }
 }
 else 
 {

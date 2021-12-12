@@ -5,7 +5,10 @@ function dbConnect()
 {
     try
     {
-        $db = new PDO('mysql:host=localhost;dbname=domotique;charset=utf8', 'root', 'root');
+        $db = new PDO('mysql:host=localhost;dbname=domotique;charset=utf8', 
+            'root', 
+            'root',
+            [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
         return $db;
     }
     catch(Exception $e)
@@ -29,6 +32,32 @@ function getAirQuality()
     return $air_quality;
 }
 
+
+function getSensorList()
+{
+    $db = dbConnect();
+    $sqlQuery = "SELECT * FROM `sensorList` ";
+    $sql = $db->prepare($sqlQuery);
+    $sql->execute();
+    $sensorList = $sql->fetchAll();
+
+    return $sensorList;
+}
+
+function dbAddNewSensor()
+{
+    $db = dbConnect();
+    $sqlQuery = "INSERT INTO sensorlist (id, name, ipAddress, port, isEnable, status, updateFreq, type) VALUES (NULL, :name, :ip_address, :port, :is_enable, :status, :updateFreq, :type)";
+
+    $sql = $db->prepare($sqlQuery);
+    $sql->execute([ 'name'=> 'exterieur',
+                    'ip_address' => '10.10.10.10',
+                    'port' => '10003',
+                    'is_enable' => '0',
+                    'status' => '0',
+                    'updateFreq' => '600',
+                    'type' => 'pdcm']);
+}
 
 
    
